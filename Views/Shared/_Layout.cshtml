@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navigation navbar-expand-lg navbar-inverse navbar-fixed-top">
+        <!-- Brand -->
+        @Html.ActionLink(" ", "Index", "Home", new { area = "" }, new { @class = "logo navbar-brand" })
+        @Html.ActionLink("Sklep z Zabawkami", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="kafelki navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse " id="collapsibleNavbar">
+            <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Strona główna", "Index", "Home")
+                </li>
+                <li class="nav-item">@Html.ActionLink("Informacje", "About", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year Sklep z zabawkami- Moja aplikacja ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Index";
+}
+    <div class="row">
+        <div class="col-lg-4">
+            <h4>Ustawienia klienta</h4>
+            @Html.ActionLink("Aktualizuj Adres Wysyłki", "Edityoudate", "Ustawienia", new { @class = "przyciskakcept" })
+            @if (!User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Usuń moje konto", "Usunswojekonto", "Ustawienia", new { @class = "przyciskakcept" })
+            }
+            @Html.ActionLink("moje zamowienia", "mojezamowienia", "koszyk", new { @class = "przyciskakcept" })
+
+        </div>
+        @if (User.IsInRole("admin")||User.IsInRole("moderator"))
+        {
+    <div class="col-lg-4">
+        <h4>Ustawienia moderatora</h4>
+        @Html.ActionLink("Zarządzanie produktami", "produktycrude", "Ustawienia", new { @class = "przyciskakcept" })
+        @Html.ActionLink("Podgląd danych użytkowników", "klienciapdate", "Ustawienia", new { @class = "przyciskakcept" })
+        @if (!User.IsInRole("admin"))
+        {@Html.ActionLink("ban urzytkowników", "nadajuprawnienia", "Ustawienia", new { @class = "przyciskakcept" })}
+        @Html.ActionLink("przeglad najnowszych komentarzy", "komenczygood", "Ustawienia", new { @class = "przyciskakcept" })
+        @Html.ActionLink("produkty do wysłania", "dowyslania", "koszyk", routeValues: null, htmlAttributes: new { @class = "przyciskakcept" });
+    </div>
+        }
+        @if (User.IsInRole("admin"))
+        {
+    <div class="col-lg-4">
+        <h4>Ustawienia Admina</h4>
+        @Html.ActionLink("uprawnienia uzytkowników", "nadajuprawnienia", "Ustawienia", new { @class = "przyciskakcept" })}
+
+    </div>
+                }
+            </div>

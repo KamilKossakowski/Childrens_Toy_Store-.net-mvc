@@ -1,0 +1,43 @@
+﻿@model Childrens_Toy_Store.Models.Komentarze
+@{
+    Layout = null;
+}
+
+
+@using (Html.BeginForm("Createaut","Komentarzes",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.koment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.koment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.koment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*@{
+           <input class="form-control" type="hidden" id="id_produktu" name="id_produktu" value="@Model.id_produktu" /> 
+        }*@
+        @Html.HiddenFor(model=>model.id_produktu,htmlAttributes: new { @class = "control-label col-md-2",value=@Model.id_produktu })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ocena, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 row">
+                <p>1</p>@Html.RadioButtonFor(model => model.ocena, 1, new { htmlAttributes = new { @class = "form-control", } })
+                <p>2</p>@Html.RadioButtonFor(model => model.ocena, 2, new { htmlAttributes = new { @class = "form-control", } })
+                <p>3</p>@Html.RadioButtonFor(model => model.ocena, 3, new { htmlAttributes = new { @class = "form-control", } })
+                <p>4</p> @Html.RadioButtonFor(model => model.ocena, 4, new { htmlAttributes = new { @class = "form-control", } })
+                <p>5</p> @Html.RadioButtonFor(model => model.ocena, 5, new { htmlAttributes = new { @class = "form-control", } })
+                @Html.ValidationMessageFor(model => model.ocena, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Createaut" class="btn btn-default przyciskakcept" />
+
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Childrens_Toy_Store.Models.Produkty>
+
+
+@foreach (var item in Model) {
+    <div class="row">
+        <div class="col-lg-3">
+            @Html.DisplayFor(modelItem => item.nazwa)
+        </div>
+        <div class="col-lg-3">
+            @Html.DisplayFor(modelItem => item.cena)
+        </div>
+        <div class="col-lg-3">
+            <img src="@item.obrazek" alt="@item.nazwa foto" style="position:center; height: 170px; width: 170px; background-repeat:round" />
+        </div>
+       <div class="col-lg-3">
+           
+            @Html.ActionLink("Details","Details", "Produkties",routeValues: new { id=item.Id_produktu },htmlAttributes:new { @class="przyciskakcept"}) 
+        </div>
+    </div>
+}
+
+

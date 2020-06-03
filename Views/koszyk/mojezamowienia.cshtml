@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Childrens_Toy_Store.Models.zamowienia>
+
+@{
+    ViewBag.Title = "mojezamowienia";
+}
+
+<h2>moje zamowienia</h2>
+
+
+
+@foreach (var item in Model)
+{
+<div class=" row">
+    @switch (item.status)
+    {
+        case 0:
+            break;
+        case 1:
+            <h6> Zamówienie w trakcie realizacji:</h6>
+
+            <div>
+                @Html.DisplayFor(modelItem => item.ad_wysylki)
+            </div>
+            <div>
+                @Html.Action("produktyzzam", "koszyk", routeValues: new { id = item.Id_zamowienia })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id_zamowienia })
+            </div>
+            break;
+        case 2:
+            <h6> Zamówienia zrealizowane:</h6>
+
+            <div>
+                @Html.DisplayFor(modelItem => item.data_wyslania)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.ad_wysylki)
+            </div>
+            @Html.Action("produktyzzam", "koszyk", routeValues: new { id = item.Id_zamowienia })
+            
+
+            break;
+    }
+</div>
+}
+
+

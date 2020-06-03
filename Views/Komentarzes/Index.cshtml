@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Childrens_Toy_Store.Models.Komentarze>
+@{ 
+    Layout = null;
+}
+
+@foreach (var item in Model) {
+    <div class="row jumbotron">
+        <div class="col-lg-2">
+            <p>Dodano </p>
+            @Html.DisplayFor(modelItem => item.data_dodania.Value.Date)
+        </div>
+        <div class="col-lg-6"></div>
+        <div class="col-lg-4">
+            <p>  Dodał  </p>
+            @Html.DisplayFor(modelItem => item.e_mail)
+            @if (User.IsInRole("moderator") || User.IsInRole("admin")&&(User.Identity.Name!="Admin@admin.admin"))
+            {
+                @Html.ActionLink("ban", "ban", "Komentarzes", routeValues:new {  UserId = item.Id_koment },htmlAttributes:new { @class="przyciskakcept"})
+            }
+        </div>
+        <div class="col-lg-12">
+            <h4> ocena produktu: </h4>
+                 @Html.DisplayFor(modelItem => item.ocena)
+        </div>
+        <div class="col-lg-12">
+            @Html.DisplayFor(modelItem => item.koment)
+        </div>
+        @if (item.e_mail == User.Identity.Name||User.IsInRole("moderator")||User.IsInRole("admin")) { 
+        <div>
+            @Html.ActionLink("Delete", "Delete","Komentarzes",routeValues: new { id=item.Id_koment },htmlAttributes: new { id=item.Id_koment })
+        </div>}
+    </div>
+}
+

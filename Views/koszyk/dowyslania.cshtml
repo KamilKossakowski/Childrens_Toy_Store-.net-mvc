@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Childrens_Toy_Store.Models.zamowienia>
+
+
+
+@foreach (var item in Model) {
+    <div class="row container">
+        <div>
+            @Html.DisplayFor(modelItem => item.e_mail)
+        </div>
+        <div>
+            @Html.DisplayFor(modelItem => item.ad_wysylki)
+        </div>
+        @Html.Action("produktyzzam", "koszyk", routeValues: new { id = item.Id_zamowienia })
+
+        <div>
+            @Html.ActionLink("wysłano", "realizacjazam", "koszyk", routeValues: new { id = item.Id_zamowienia }, htmlAttributes: new { @class = "przyciskakcept" })
+        </div>
+    </div>
+}
+
+

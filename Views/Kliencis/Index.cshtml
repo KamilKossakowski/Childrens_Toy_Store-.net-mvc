@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Childrens_Toy_Store.Models.Klienci>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="table tg">
+
+    }
+    @foreach (var item in Model)
+    {
+        <div class=" container continum row">
+            <div class="tg-mow8 col-lg-4">
+                @Html.DisplayNameFor(model => model.email)
+                @Html.DisplayFor(modelItem => item.email)
+            </div>
+            <div class="tg-mow8 col-lg-2">
+                @Html.DisplayNameFor(model => model.imie)
+                @Html.DisplayFor(modelItem => item.imie)
+            </div>
+            <div class="tg-mow8 col-lg-3">
+                @Html.DisplayNameFor(model => model.nazwisko)
+                @Html.DisplayFor(modelItem => item.nazwisko)
+            </div>
+            <div class="tg-mow8  col-lg-3">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id_uzytkownik, @class="przyciskakcept" } ) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id_uzytkownik, @class="przyciskakcept"  }) 
+            </div>
+        </div>
+    }
+    </div>

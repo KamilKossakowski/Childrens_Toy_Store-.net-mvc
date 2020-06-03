@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Usunswojekonto";
+}
+
+<h2>Czy napewno chcesz nas opuścić?</h2>
+<div class="row">
+    <div class="col-lg-3">
+
+        @Html.ActionLink("Tak jestem pewien", "chcebykontodead", "Ustawienia", htmlAttributes: new { @class = "przyciskakcept", id = User.Identity.Name });
+    </div>
+    <div class="col-lg-3"></div>
+    <div class="cal-lg-3">
+        @Html.ActionLink("Nie, zabież mnie stąd", "Index", "Home", htmlAttributes: new { @class = "przycisknieakcept" });
+    </div>
+</div>

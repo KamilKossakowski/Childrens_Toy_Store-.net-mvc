@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CoZamowione">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_zamowienia" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id_produktu" Type="int" Nullable="false" />
+          <Property Name="e-mail" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Klienci">
+          <Key>
+            <PropertyRef Name="Id_uzytkownik" />
+          </Key>
+          <Property Name="Id_uzytkownik" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="256" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="50" />
+          <Property Name="ulica" Type="varchar" MaxLength="50" />
+          <Property Name="numer_domu" Type="varchar" MaxLength="10" />
+          <Property Name="kod_pocztowy" Type="varchar" MaxLength="6" />
+          <Property Name="poczta" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Komentarze">
+          <Key>
+            <PropertyRef Name="Id_koment" />
+          </Key>
+          <Property Name="Id_koment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="data_dodania" Type="date" />
+          <Property Name="id_uzytkownika" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="e-mail" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="id_produktu" Type="int" Nullable="false" />
+          <Property Name="koment" Type="text" />
+          <Property Name="ocena" Type="int" />
+        </EntityType>
+        <EntityType Name="Produkty">
+          <Key>
+            <PropertyRef Name="Id_produktu" />
+          </Key>
+          <Property Name="Id_produktu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="opis" Type="varchar(max)" />
+          <Property Name="cena" Type="float" Nullable="false" />
+          <Property Name="obrazek" Type="varchar(max)" />
+          <Property Name="dozw_wiek" Type="int" />
+          <Property Name="rok_produkcji" Type="int" />
+        </EntityType>
+        <EntityType Name="zamowienia">
+          <Key>
+            <PropertyRef Name="Id_zamowienia" />
+          </Key>
+          <Property Name="Id_zamowienia" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="data_wyslania" Type="date" />
+          <Property Name="id_klienta" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="e-mail" Type="nvarchar" MaxLength="128" />
+          <Property Name="status" Type="int" />
+          <Property Name="id_pracownika" Type="nvarchar" MaxLength="128" />
+          <Property Name="ad_wysylki" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoZamowione" EntityType="Self.CoZamowione" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klienci" EntityType="Self.Klienci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Komentarze" EntityType="Self.Komentarze" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produkty" EntityType="Self.Produkty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zamowienia" EntityType="Self.zamowienia" Schema="dbo" store:Type="Tables" />
+          </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Komentarze">
+          <Key>
+            <PropertyRef Name="Id_koment" />
+          </Key>
+          <Property Name="Id_koment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="data_dodania" Type="DateTime" Precision="0" />
+          <Property Name="id_uzytkownika" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_produktu" Type="Int32" Nullable="false" />
+          <Property Name="koment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ocena" Type="Int32" />
+          <Property Name="e_mail" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Produkty">
+          <Key>
+            <PropertyRef Name="Id_produktu" />
+          </Key>
+          <Property Name="Id_produktu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cena" Type="Double" Nullable="false" />
+          <Property Name="obrazek" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="dozw_wiek" Type="Int32" />
+          <Property Name="rok_produkcji" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Komentarze" EntityType="Self.Komentarze" />
+          <EntitySet Name="Produkty" EntityType="Self.Produkty" />
+          <EntitySet Name="Klienci" EntityType="Model.Klienci" />
+          <EntitySet Name="zamowienia" EntityType="Model.zamowienia" />
+          <EntitySet Name="CoZamowione" EntityType="Model.CoZamowione" />
+        </EntityContainer>
+        <EntityType Name="Klienci">
+          <Key>
+            <PropertyRef Name="Id_uzytkownik" />
+          </Key>
+          <Property Name="Id_uzytkownik" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ulica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numer_domu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="kod_pocztowy" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="poczta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="zamowienia">
+          <Key>
+            <PropertyRef Name="Id_zamowienia" />
+          </Key>
+          <Property Name="Id_zamowienia" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="data_wyslania" Type="DateTime" Precision="0" />
+          <Property Name="id_klienta" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="e_mail" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="id_pracownika" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ad_wysylki" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CoZamowione">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_zamowienia" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Id_produktu" Type="Int32" Nullable="false" />
+          <Property Name="e_mail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Model.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Komentarze">
+            <EntityTypeMapping TypeName="Model.Komentarze">
+              <MappingFragment StoreEntitySet="Komentarze">
+                <ScalarProperty Name="e_mail" ColumnName="e-mail" />
+                <ScalarProperty Name="Id_koment" ColumnName="Id_koment" />
+                <ScalarProperty Name="data_dodania" ColumnName="data_dodania" />
+                <ScalarProperty Name="id_uzytkownika" ColumnName="id_uzytkownika" />
+                <ScalarProperty Name="id_produktu" ColumnName="id_produktu" />
+                <ScalarProperty Name="koment" ColumnName="koment" />
+                <ScalarProperty Name="ocena" ColumnName="ocena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produkty">
+            <EntityTypeMapping TypeName="Model.Produkty">
+              <MappingFragment StoreEntitySet="Produkty">
+                <ScalarProperty Name="Id_produktu" ColumnName="Id_produktu" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="cena" ColumnName="cena" />
+                <ScalarProperty Name="obrazek" ColumnName="obrazek" />
+                <ScalarProperty Name="dozw_wiek" ColumnName="dozw_wiek" />
+                <ScalarProperty Name="rok_produkcji" ColumnName="rok_produkcji" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klienci">
+            <EntityTypeMapping TypeName="Model.Klienci">
+              <MappingFragment StoreEntitySet="Klienci">
+                <ScalarProperty Name="poczta" ColumnName="poczta" />
+                <ScalarProperty Name="kod_pocztowy" ColumnName="kod_pocztowy" />
+                <ScalarProperty Name="numer_domu" ColumnName="numer_domu" />
+                <ScalarProperty Name="ulica" ColumnName="ulica" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="Id_uzytkownik" ColumnName="Id_uzytkownik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zamowienia">
+            <EntityTypeMapping TypeName="Model.zamowienia">
+              <MappingFragment StoreEntitySet="zamowienia">
+                <ScalarProperty Name="ad_wysylki" ColumnName="ad_wysylki" />
+                <ScalarProperty Name="id_pracownika" ColumnName="id_pracownika" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="e_mail" ColumnName="e-mail" />
+                <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
+                <ScalarProperty Name="data_wyslania" ColumnName="data_wyslania" />
+                <ScalarProperty Name="Id_zamowienia" ColumnName="Id_zamowienia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoZamowione">
+            <EntityTypeMapping TypeName="Model.CoZamowione">
+              <MappingFragment StoreEntitySet="CoZamowione">
+                <ScalarProperty Name="e_mail" ColumnName="e-mail" />
+                <ScalarProperty Name="Id_produktu" ColumnName="Id_produktu" />
+                <ScalarProperty Name="Id_zamowienia" ColumnName="Id_zamowienia" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

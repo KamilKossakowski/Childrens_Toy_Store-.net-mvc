@@ -1,0 +1,74 @@
+﻿@model Childrens_Toy_Store.Models.Klienci
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Klienci</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nazwisko)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ulica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ulica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numer_domu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numer_domu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kod_pocztowy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kod_pocztowy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.poczta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.poczta)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit",routeValues:new { id = Model.Id_uzytkownik },htmlAttributes:new { @class="przyciskakcept"}) |
+    @Html.ActionLink("Back to List", "Index",routeValues:null,htmlAttributes:new { @class="przyciskakcept"})
+</p>

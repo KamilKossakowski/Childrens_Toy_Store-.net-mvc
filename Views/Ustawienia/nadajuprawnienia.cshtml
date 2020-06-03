@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Childrens_Toy_Store.Models.Uprawnieniawyswietl>
+@{
+    ViewBag.Title = "nadajuprawnienia";
+}
+
+<h2>nadajuprawnienia</h2>
+
+<div class="table tg">
+
+    }
+    @foreach (var item in Model)
+    {
+        <div class=" container continum row">
+            <div class="tg-mow8 col-lg-4">
+                @Html.DisplayNameFor(model => model.email)
+                @Html.DisplayFor(modelItem => item.email)
+            </div>
+            <div class="tg-mow8 col-lg-2">
+                @Html.DisplayNameFor(model => model.imie)
+                @Html.DisplayFor(modelItem => item.imie)
+            </div>
+            <div class="tg-mow8 col-lg-3">
+                @Html.DisplayNameFor(model => model.nazwisko)
+                @Html.DisplayFor(modelItem => item.nazwisko)
+            </div>
+            <div class="tg-mow8 col-lg-3">
+                @switch (item.RoleId)
+                {
+                    case "1":
+                        <div><p>Admin</p></div>
+                        break;
+                    case "2":
+                        <div><p>Moderator</p></div>
+                        break;
+                    case "3":
+                        <div><p>Normal</p></div>
+                        break;
+                    case "4":
+                        <div><p>Baned</p></div>
+                        break;
+                }
+
+
+            </div>
+            <div class="tg-mow8 row  col-lg-12">
+                @switch (item.RoleId)
+                {
+                    case "1":
+
+                        break;
+                    case "2":
+
+                        if (User.IsInRole("admin"))
+                        {
+                            @Html.ActionLink("Degradacja do norm", "ton", "Ustawienia", routeValues: new { UserId = item.Id_uzytkownik },htmlAttributes:new { @class="przyciskakcept"})
+                            @Html.ActionLink("ban", "Ban", "Ustawienia", routeValues: new { UserId = item.Id_uzytkownik },htmlAttributes:new { @class="przyciskakcept"})
+                        }
+
+                        break;
+                    case "3":
+                        if (User.IsInRole("admin"))
+                        {
+                            @Html.ActionLink("Awans to moderator", "tam", "Ustawienia", routeValues: new { UserId = item.Id_uzytkownik },htmlAttributes:new { @class="przyciskakcept"})
+                        }
+                        @Html.ActionLink("ban", "Ban", "Ustawienia", routeValues: new { UserId = item.Id_uzytkownik },htmlAttributes:new { @class="przyciskakcept"})
+                        break;
+                    case "4":
+                        if (User.IsInRole("admin"))
+                        {
+                            @Html.ActionLink("Awans to moderator", "tam", "Ustawienia", routeValues: new { UserId = item.Id_uzytkownik },htmlAttributes:new { @class="przyciskakcept"})
+                        }
+                        @Html.ActionLink("unban", "ton", "Ustawienia", routeValues: new { UserId = item.Id_uzytkownik },htmlAttributes:new { @class="przyciskakcept"})
+                        break;
+                }
+            </div>
+        </div>
+    }
+</div>

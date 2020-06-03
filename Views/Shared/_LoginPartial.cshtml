@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item" style="padding-top:8px">
+
+            @Html.ActionLink("Witaj," + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", role = "button", @class = "nav-item" })
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Koszyk
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @Html.Action("wyswietlkoszyk","koszyk")
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Ustawienia
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @Html.ActionLink("Panel uzytkownika", "Index", "Ustawienia", routeValues: null, htmlAttributes: new { role = "button", @class = "dropdown-item" })
+                @Html.ActionLink("Ustawienia hasła", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", role = "button", @class = "dropdown-item" })
+                @Html.ActionLink("Aktualizuj Adres Wysyłki", "Edityoudate", "Ustawienia", routeValues: null, htmlAttributes: new { role = "button", @class = "dropdown-item" })
+                @Html.ActionLink("moje zamowienia","mojezamowienia","koszyk", routeValues: null, htmlAttributes: new { role = "button", @class = "dropdown-item" })
+                @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                {
+                    <div class="dropdown-divider"></div>
+                    <div>Ustawienia moderatora</div>
+                    <div class="dropdown-divider"></div>
+                    @Html.ActionLink("Zarządzanie produktami", "produktycrude", "Ustawienia", routeValues: null, htmlAttributes: new { role = "button", @class = "dropdown-item" })
+                    @Html.ActionLink("Podgląd danych użytkowników", "klienciapdate", "Ustawienia", routeValues: null, htmlAttributes: new { role = "button", @class = "dropdown-item" })
+                    @Html.ActionLink("wyslij produkt","dowyslania","koszyk", routeValues:null,htmlAttributes:new { role = "button", @class = "dropdown-item"})
+                    if (!User.IsInRole("admin"))
+                    {@Html.ActionLink("ban urzytkowników", "nadajuprawnienia", "Ustawienia", routeValues: null, htmlAttributes: new { role = "button", @class = "dropdown-item" })}
+            }
+                @if (User.IsInRole("admin"))
+                {
+                    <div class="dropdown-divider"></div>
+                    <div>Ustawienia admina</div>
+                    <div class="dropdown-divider"></div>
+                    @Html.ActionLink("uprawnienia uzytkowników", "nadajuprawnienia", "Ustawienia", routeValues: null, htmlAttributes: new { role = "button", @class = "dropdown-item" })
+                }
+            </div>
+        </li>
+        <li class="nav-item" style="padding-top:8px">
+
+        </li>
+        <li class="nav-item" style="padding-top:8px"><a href="javascript:document.getElementById('logoutForm').submit()" role="button" style="margin-top:8px" class="nav-item">Wyloguj</a></li>
+    </ul>
+    }
+}
+else
+{
+
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">@Html.ActionLink("Zarejestruj", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", role="button"})</li>
+        <li class="nav-item">@Html.ActionLink("Zaloguj", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink",role="button" })</li>
+    </ul>
+}

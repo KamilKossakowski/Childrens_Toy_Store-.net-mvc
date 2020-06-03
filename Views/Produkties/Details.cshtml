@@ -1,0 +1,77 @@
+﻿@model Childrens_Toy_Store.Models.Produkty
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Produkty</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.opis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cena)
+        </dd>
+        <img src="@Model.obrazek" alt="@Model.nazwa foto" style="position:center; height: 170px; width: 170px; background-repeat:round" />
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dozw_wiek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dozw_wiek)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rok_produkcji)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rok_produkcji)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole("admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", routeValues: new { id = Model.Id_produktu }, htmlAttributes: new { @class = "przyciskakcept" })
+        @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "przyciskakcept" })}
+    else
+    {
+        @Html.ActionLink("Back to List", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "przyciskakcept" })
+    }
+    @if (User.IsInRole("normal") || User.IsInRole("admin") || User.IsInRole("moderator"))
+    {
+
+        @Html.ActionLink("do koszyka", "addprodukt", "koszyk", routeValues: new { id = Model.Id_produktu }, htmlAttributes: new { @class = "przyciskakcept" })
+    }
+
+    </div>
+@if ((User.IsInRole("admin")) || (User.IsInRole("moderator")) || (User.IsInRole("normal")))
+{
+    @Html.Action("Index", "Komentarzes", new { id = Model.Id_produktu })
+    @Html.Action("Create", "Komentarzes", new { id = Model.Id_produktu })
+}

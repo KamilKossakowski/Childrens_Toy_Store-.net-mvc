@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Childrens_Toy_Store.Models.Produkty>
+
+@{
+    Layout = null;
+    double suma = 0.0;
+}
+
+@foreach (var item in Model)
+{
+    <div class="row tg">
+        <div class="tg-mow8 col-lg-4">
+            <img src="@item.obrazek" alt="@item.nazwa foto" style="position:center; height: 17px; width: 17px; background-repeat:round" />
+        </div>
+        <div class="col-lg-3 tg-mow8">
+            @Html.DisplayFor(modelItem => item.nazwa)
+        </div>
+        <div class="col-lg-3 tg-mow8">
+            @Html.DisplayFor(modelItem => item.cena)
+        </div>
+        @{
+            suma += item.cena;
+        }
+        
+    </div>
+}
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <p>suma wynosi @suma zł</p>
+    </div>
+</div>

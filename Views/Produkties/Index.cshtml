@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Childrens_Toy_Store.Models.Produkty>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Dostępne produkty</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",routeValues:null,htmlAttributes:new { @class="przyciskakcept"})
+</p>
+@foreach (var item in Model)
+{
+    <div class=" container continum row">
+        <div class="tg-mow8 col-lg-4">
+            <img src="@item.obrazek" alt="@item.nazwa foto" style="position:center; height: 170px; width: 170px; background-repeat:round" />
+        </div>
+        <div class="tg-mow8 col-lg-2">
+            @Html.DisplayFor(modelItem => item.nazwa)
+        </div>
+        <div class="tg-mow8 col-lg-3">
+            @Html.DisplayFor(modelItem => item.cena)
+        </div>
+        <div class="tg-mow8  col-lg-3">
+            @if (!User.IsInRole("ban"))
+            {
+            @Html.ActionLink("Details", "Details",routeValues: new { id = item.Id_produktu },htmlAttributes:new { @class="przyciskakcept"}) 
+            @Html.ActionLink("do koszyka", "addprodukt", "koszyk", routeValues: new { id = item.Id_produktu },htmlAttributes:new { @class="przyciskakcept"})
+            if (User.IsInRole("admin") || User.IsInRole("moderator"))
+            {
+
+                @Html.ActionLink("Edit", "Edit",routeValues:new { id = item.Id_produktu },htmlAttributes:new { @class="przyciskakcept"}) 
+                @Html.ActionLink("Delete", "Delete",routeValues:new { id = item.Id_produktu },htmlAttributes:new { @class="przyciskakcept"})
+                }
+            }
+        </div>
+    </div>
+}
+
